@@ -3,7 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoanProject.Data\LoanProject.Data.csproj" />
+    <ProjectReference Include="..\LoanProject.Repository\LoanProject.Repository.csproj" />
+  </ItemGroup>
 
 </Project>

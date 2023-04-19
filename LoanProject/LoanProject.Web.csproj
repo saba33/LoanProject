@@ -18,12 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\LoanProject.Data\LoanProject.Data.csproj" />
+    <ProjectReference Include="..\LoanProject.Services\LoanProject.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LoanProject.Data\LoanProject.Data.csproj" />
-    <ProjectReference Include="..\LoanProject.Services\LoanProject.Services.csproj" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

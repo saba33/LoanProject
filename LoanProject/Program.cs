@@ -8,6 +8,10 @@ using LoanProject.Services.Abstractions;
 using LoanProject.Services.Implementations;
 using LoanProject.Repository.Abstractions;
 using LoanProject.Repository.Implementations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,11 +34,27 @@ Log.Logger = new LoggerConfiguration()
           columnOptions: new ColumnOptions(),
           restrictedToMinimumLevel: LogEventLevel.Verbose)
       .CreateLogger();
-#pragma warning restore CS0618 
-builder.Services.AddScoped<IPasswordHasher,IPasswordHasher>();
-builder.Services.AddScoped<IUserService,UserService>();
+#pragma warning restore CS0618
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JWTConfiguration:Secret").Value))
+    };
+});
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(ILoanServiceRepository<>), typeof(LoanServiceRepository<>));
-builder.Services.AddTransient<LoggingMiddleware>();
+
 
 
 var app = builder.Build();

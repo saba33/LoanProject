@@ -20,7 +20,7 @@ namespace LoanProject.Services.Implementations
             }
         }
 
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        public bool VerifyPasswordHash(string password, byte[] passwordHash,byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))
             {

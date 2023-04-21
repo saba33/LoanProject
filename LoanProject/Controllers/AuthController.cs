@@ -1,7 +1,7 @@
 ﻿using LoanProject.Data.Models;
 using LoanProject.Services.Abstractions;
 using LoanProject.Services.Models;
-using LoanProject.Web.Model;
+using LoanProject.Services.Models.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,11 +19,18 @@ namespace LoanProject.Web.Controllers
         {
             _hasher = hasher;
             _userService = userService;
+        }
 
+        [HttpPost("Login")]
+        public async Task<ActionResult<LoginResponse>> Register(LoginModel request)
+        {
+            // add loggers 
+            var result = await _userService.LoginUser(request);
+            return Ok(result);
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(UserDto request)
+        public async Task<ActionResult<LoginResponse>> Register(UserDto request)
         {
             // add loggers 
             var result = await _userService.RegisterUserAsync(request);

@@ -1,0 +1,6 @@
+{
+  "JWTConfiguration": {
+    "Secret": "TESTSECRET584622PP",
+    "ExpirationInMinutes": 10
+  }
+}

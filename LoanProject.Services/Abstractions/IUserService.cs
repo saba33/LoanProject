@@ -1,4 +1,5 @@
 ﻿using LoanProject.Services.Models;
+using LoanProject.Services.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace LoanProject.Services.Abstractions
 {
     public interface IUserService
     {
-        Task<string> RegisterUserAsync(UserDto user);
-        Task<string> LoginUser(string email, string password);
+        Task<RegisterResponse> RegisterUserAsync(UserDto user);
+        Task<LoginResponse> LoginUser(LoginModel request);
+        Task<Dictionary<byte[], byte[]>> GetHashandSalt(string mail);
     }
 }

@@ -40,11 +40,13 @@ namespace LoanProject.Repository.Implementations
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+             await _dbContext.SaveChangesAsync();
         }
 
         public void Update(T entity)

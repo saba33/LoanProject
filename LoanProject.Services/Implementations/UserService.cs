@@ -7,6 +7,7 @@ using LoanProject.Services.Models.Enum;
 using LoanProject.Services.Models.Responses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -30,9 +31,9 @@ namespace LoanProject.Services.Implementations
         public async Task<Dictionary<byte[], byte[]>> GetHashandSalt(string mail)
         {
             var result = new Dictionary<byte[], byte[]>();
-            var user = _repo.FindAsync(p => p.Equals(mail)).Result.FirstOrDefault();
-            var passHash = user.PasswordHash;
-            var passSalt = user.PasswordSalt;
+            var user = await _repo.FindAsync(p => p.Equals(mail));
+            byte[] passHash = user.FirstOrDefault().PasswordHash;
+            byte[] passSalt = user.FirstOrDefault().PasswordSalt;
             result.Add(passHash, passSalt);
             return await Task.FromResult(result);
         }
@@ -41,14 +42,14 @@ namespace LoanProject.Services.Implementations
         {
             var users = await _repo.FindAsync(u => u.Email == request.Mail);
             var user = users.FirstOrDefault();
-            var passInfo = GetHashandSalt(request.Mail).Result.FirstOrDefault();
+            //var passInfo = GetHashandSalt(request.Mail).Result.FirstOrDefault();
 
             if (user == null)
             {
                 return new LoginResponse { Message = "Email or password is incorrect" };
             }
 
-            if (!_hasher.VerifyPasswordHash(request.Password, passInfo.Key, passInfo.Value))
+            if (!_hasher.VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return new LoginResponse { Message = "Email or password is incorrect" };
             }
@@ -68,14 +69,16 @@ namespace LoanProject.Services.Implementations
             _hasher.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             User user = new User()
-            {
+            {                                                                                                                                                                                                                                                                   
                 Name = request.Name,
                 Email = request.Email,
                 DateOfBirth = request.DateOfBirth,
                 IdNumber = request.IdNumber,
                 LastName = request.IdNumber,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Country = request.Country,
+                Phone= request.Phone
             };
 
             await _repo.AddAsync(user);

@@ -23,6 +23,9 @@ namespace LoanProject.Data.DbContect
                    .WithMany(u => u.Loans)
                    .HasForeignKey(l => l.UserId);
 
+            builder.Entity<Loan>()
+                .HasKey(l => l.LoanId);
+
             base.OnModelCreating(builder);
         }
 

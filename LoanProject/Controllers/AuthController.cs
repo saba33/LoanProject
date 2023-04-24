@@ -14,7 +14,6 @@ namespace LoanProject.Web.Controllers
         private readonly IPasswordHasher _hasher;
         private readonly IUserService _userService;
 
-        public static User user = new User();
         public AuthController(IPasswordHasher hasher, IUserService userService)
         {
             _hasher = hasher;

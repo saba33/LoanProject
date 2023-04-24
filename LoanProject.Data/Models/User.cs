@@ -17,5 +17,8 @@ namespace LoanProject.Data.Models
         public string IdNumber { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
         public List<Loan> Loans { get; set; }
+        public string Phone { get; set; } = string.Empty;
+        public string Country { get; set; } = string.Empty;
+
     }
 }

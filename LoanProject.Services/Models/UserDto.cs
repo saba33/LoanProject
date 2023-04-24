@@ -15,6 +15,8 @@ namespace LoanProject.Services.Models
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string IdNumber { get; set; } = string.Empty;
+        public string  Country { get; set; }
+        public string Phone { get; set; }
         public DateTime DateOfBirth { get; set; }
     }
 }

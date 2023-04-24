@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace LoanProject.Repository.Implementations
 {
-    public class LoanServiceRepository<T> : ILoanServiceRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
 
         private readonly DatabaseContext _dbContext;
         private readonly DbSet<T> _dbSet;
 
-        public LoanServiceRepository(DatabaseContext dbContext)
+        public BaseRepository(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();

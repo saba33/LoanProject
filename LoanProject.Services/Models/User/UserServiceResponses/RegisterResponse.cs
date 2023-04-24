@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoanProject.Services.Models.Responses
+namespace LoanProject.Services.Models.User.Responses
 {
     public class RegisterResponse : BaseResponse
     {

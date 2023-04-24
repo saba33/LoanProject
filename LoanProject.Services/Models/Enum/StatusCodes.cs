@@ -10,6 +10,7 @@ namespace LoanProject.Services.Models.Enum
     {
         Success = 200,
         BadRequest = 400,
-        Timeout = 408
+        Timeout = 408,
+        Unauthorized = 401
     }
 }

@@ -11,8 +11,8 @@ namespace LoanProject.Repository.Abstractions
 {
     public interface ILoanRepository : IBaseRepository<Loan>
     {
-        Task<IEnumerable<Loan>> GetLoansAsync(CancellationToken cancellationToken, Expression<Func<Loan, bool>> predicate, int userId);
+        Task<IEnumerable<Loan>> GetLoansByUserIdAsync(Expression<Func<Loan, bool>> predicate);
         Task UpdateLoanStatusAsync(int loanId, LoanStatus status);
-        Task<IEnumerable<Loan>> GetExistingLoansAsync();
+        Task<IEnumerable<Loan>> GetAll();
     }
 }

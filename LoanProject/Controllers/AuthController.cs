@@ -15,7 +15,6 @@ namespace LoanProject.Web.Controllers
         private readonly IPasswordHasher _hasher;
         private readonly IUserService _userService;
 
-        //public static User user = new User(); I need to clean up this dont forget
         public AuthController(IPasswordHasher hasher, IUserService userService)
         {
             _hasher = hasher;
@@ -25,7 +24,6 @@ namespace LoanProject.Web.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<LoginResponse>> Register(LoginModel request)
         {
-            // add loggers 
             var result = await _userService.LoginUser(request);
             return Ok(result);
         }
@@ -33,7 +31,6 @@ namespace LoanProject.Web.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<LoginResponse>> Register(UserDto request)
         {
-            // add loggers 
             var result = await _userService.RegisterUserAsync(request);
             return Ok(result);
         }

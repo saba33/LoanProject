@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LoanProject.Services.Models.Loan.LoanServiceResponses
 {
-    public class GetUserLoansResponse : BaseResponse
+    public class EditLoanResponse : BaseResponse
     {
-        public IEnumerable<LoanProject.Data.Models.Loan> Loans { get; set; }
+        public int UserId { get; set; }
     }
 }

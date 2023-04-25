@@ -1,9 +1,11 @@
 ﻿using LoanProject.Data.Models.Enums;
 using LoanProject.Services.Abstractions;
+using LoanProject.Services.Models.Loan.LoanServiceRequest;
 using LoanProject.Services.Models.Loan.LoanServiceResponses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
@@ -24,8 +26,8 @@ namespace LoanProject.Web.Controllers
         public async Task<ActionResult<TakeLoanResponse>> TakeLoan(TakeLoanRequestDto loanRequest)
         {
             var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
-            
-            
+
+
             if (userIdClaim == null)
             {
                 return BadRequest(new TakeLoanResponse
@@ -35,17 +37,38 @@ namespace LoanProject.Web.Controllers
                     StatusCode = LoanProject.Services.Models.Enum.StatusCodes.Unauthorized
                 });
             }
-            
+
             var response = await _loanService.TakeLoan(loanRequest, int.Parse(userIdClaim.Value));
             return Ok(response);
         }
 
-        [HttpGet("GetUserLoans")]
         [Authorize]
+        [HttpGet("GetUserLoans")]
         public async Task<GetUserLoansResponse> GetUserLoansByUserId(int userId)
         {
-            return 
+            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
+            var result = await _loanService.GetLoanByUserIdAsync(int.Parse(userIdClaim.Value));
+            return new GetUserLoansResponse
+            {
+                Loans = result.ToList(),
+                Message = "Current Loans.",
+                StatusCode = Services.Models.Enum.StatusCodes.Success
+            };
         }
 
+        [Authorize]
+        [HttpPut("EditLoan")]
+        public async Task<EditLoanResponse> EditLoanInfo(UpdateLoanRequest request, int loanId)
+        {
+           return await _loanService.EditLoanInfoAsync(request, loanId);
+        }
+
+        [Authorize]
+        [HttpDelete("CancelLoan")]
+        public async Task<CancelLoanResponse> CancelLoan(int loanId)
+        {
+            return await _loanService.CancelLoan(loanId);
+        }
+    
     }
 }

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProject.Web", "LoanProject\LoanProject.Web.csproj", "{788A9460-9196-4598-AC02-2DA461CD3D96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanProject.Web", "LoanProject\LoanProject.Web.csproj", "{788A9460-9196-4598-AC02-2DA461CD3D96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProject.Data", "LoanProject.Data\LoanProject.Data.csproj", "{D556AB01-3218-4878-8BDF-E85084A9C4B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanProject.Data", "LoanProject.Data\LoanProject.Data.csproj", "{D556AB01-3218-4878-8BDF-E85084A9C4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProject.Services", "LoanProject.Services\LoanProject.Services.csproj", "{AB4A8843-2EDE-4646-8E2D-52102044E491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanProject.Services", "LoanProject.Services\LoanProject.Services.csproj", "{AB4A8843-2EDE-4646-8E2D-52102044E491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProject.Repository", "LoanProject.Repository\LoanProject.Repository.csproj", "{15FE988A-0344-4F99-8BE3-7F05AD128A71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanProject.Repository", "LoanProject.Repository\LoanProject.Repository.csproj", "{15FE988A-0344-4F99-8BE3-7F05AD128A71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProject.Test", "LoanProject.Test\LoanProject.Test.csproj", "{461FB555-A536-4479-92FB-0327E1488B45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProject.Test", "LoanProject.Test\LoanProject.Test.csproj", "{E210E880-4EE9-4B89-B49D-B3E5DE31577B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{15FE988A-0344-4F99-8BE3-7F05AD128A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15FE988A-0344-4F99-8BE3-7F05AD128A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15FE988A-0344-4F99-8BE3-7F05AD128A71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{461FB555-A536-4479-92FB-0327E1488B45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{461FB555-A536-4479-92FB-0327E1488B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{461FB555-A536-4479-92FB-0327E1488B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{461FB555-A536-4479-92FB-0327E1488B45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E210E880-4EE9-4B89-B49D-B3E5DE31577B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E210E880-4EE9-4B89-B49D-B3E5DE31577B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E210E880-4EE9-4B89-B49D-B3E5DE31577B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E210E880-4EE9-4B89-B49D-B3E5DE31577B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

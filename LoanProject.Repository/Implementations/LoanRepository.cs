@@ -19,9 +19,16 @@ namespace LoanProject.Repository.Implementations
         {
 
         }
-        public async Task<IEnumerable<Loan>> GetLoansAsync(CancellationToken cancellationToken, Expression<Func<Loan, bool>> predicate, int userId)
+
+        public async Task<IEnumerable<Loan>> GetAll()
         {
-            return await base.FindAsync(x => x.UserId == userId);
+            return await base.GetAllAsync();
+        }
+
+
+        public async Task<IEnumerable<Loan>> GetLoansByUserIdAsync(Expression<Func<Loan, bool>> predicate)
+        {
+            return await base.FindAsync(predicate);
         }
 
         public async Task UpdateLoanStatusAsync(int loanId, LoanStatus status)
@@ -32,11 +39,6 @@ namespace LoanProject.Repository.Implementations
                 loan.LoanStatus = status;
                 base.Update(loan);
             }
-        }
-
-        public async Task<IEnumerable<Loan>> GetExistingLoansAsync()
-        {
-            return await base.GetAllAsync();
         }
 
     }

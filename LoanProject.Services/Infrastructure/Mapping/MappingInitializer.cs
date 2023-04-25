@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LoanProject.Data.Models;
-using LoanProject.Services.Models.Loan.LoanServiceResponses;
+using LoanProject.Services.Models.Loan.LoanServiceRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace LoanProject.Services.Infrastructure.Mapping
         public MappingInitializer()
         {
             CreateMap<TakeLoanRequestDto, Loan>().ReverseMap();
+            CreateMap<UpdateLoanRequest, Loan>().ReverseMap();
         }
     }
 }

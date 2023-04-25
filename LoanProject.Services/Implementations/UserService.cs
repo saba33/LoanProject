@@ -1,10 +1,14 @@
-﻿using LoanProject.Data.Models;
+﻿using AutoMapper;
+using LoanProject.Data.Models;
 using LoanProject.Repository.Abstractions;
 using LoanProject.Repository.Implementations;
 using LoanProject.Services.Abstractions;
 using LoanProject.Services.Models;
 using LoanProject.Services.Models.Enum;
-using LoanProject.Services.Models.Responses;
+using LoanProject.Services.Models.Loan.LoanServiceResponses;
+using LoanProject.Services.Models.User;
+using LoanProject.Services.Models.User.Responses;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -19,13 +23,15 @@ namespace LoanProject.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IPasswordHasher _hasher;
-        private readonly ILoanServiceRepository<User> _repo;
+        private readonly IBaseRepository<User> _repo;
         private readonly IJwtService _jwtService;
-        public UserService(IPasswordHasher hasher, ILoanServiceRepository<User> repo, IJwtService jwtService)
+        private readonly IMapper _mapper;
+        public UserService(IPasswordHasher hasher, IBaseRepository<User> repo, IJwtService jwtService, IMapper mapper)
         {
             _hasher = hasher;
             _repo = repo;
             _jwtService = jwtService;
+            _mapper = mapper;
         }
 
         public async Task<Dictionary<byte[], byte[]>> GetHashandSalt(string mail)
@@ -46,12 +52,12 @@ namespace LoanProject.Services.Implementations
 
             if (user == null)
             {
-                return new LoginResponse { Message = "Email or password is incorrect" };
+                return new LoginResponse { StatusCode = StatusCodes.BadRequest, Token = null, Message = "Email or password is incorrect" };
             }
 
             if (!_hasher.VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
-                return new LoginResponse { Message = "Email or password is incorrect" };
+                return new LoginResponse { StatusCode = StatusCodes.BadRequest, Token = null, Message = "Email or password is incorrect" };
             }
 
             var token = _jwtService.GenerateToken(request.Mail);
@@ -88,5 +94,7 @@ namespace LoanProject.Services.Implementations
                 StatusCode = StatusCodes.Success
             };
         }
+
+
     }
 }

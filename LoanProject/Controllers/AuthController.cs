@@ -1,7 +1,8 @@
 ﻿using LoanProject.Data.Models;
 using LoanProject.Services.Abstractions;
 using LoanProject.Services.Models;
-using LoanProject.Services.Models.Responses;
+using LoanProject.Services.Models.User;
+using LoanProject.Services.Models.User.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace LoanProject.Web.Controllers
         private readonly IPasswordHasher _hasher;
         private readonly IUserService _userService;
 
+        //public static User user = new User(); I need to clean up this dont forget
         public AuthController(IPasswordHasher hasher, IUserService userService)
         {
             _hasher = hasher;

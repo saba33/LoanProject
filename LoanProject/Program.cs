@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Configuration;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +21,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+    builder => builder.AllowAnyOrigin()
+   .AllowAnyMethod()
+   .AllowAnyHeader()
+   .AllowCredentials());
+});
 #pragma warning disable CS0618 
 Log.Logger = new LoggerConfiguration()
       .MinimumLevel.Verbose()
@@ -53,7 +63,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped(typeof(ILoanServiceRepository<>), typeof(LoanServiceRepository<>));
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 
 

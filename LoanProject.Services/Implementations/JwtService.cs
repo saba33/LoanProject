@@ -20,7 +20,7 @@ namespace LoanProject.Services.Implementations
             _config = config;
         }
 
-        public string GenerateToken(string email)
+        public string GenerateToken(string userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_config.GetSection("JWTConfiguration:Secret").Value.ToCharArray());
@@ -28,9 +28,10 @@ namespace LoanProject.Services.Implementations
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                new Claim(ClaimTypes.Email, email),
-            }),
-                Expires = DateTime.UtcNow.AddMinutes(double.Parse(_config.GetSection("JWTConfiguration:ExpirationInMinutes").Value)),
+                    new Claim(ClaimTypes.Name, userId),
+                }),
+
+                Expires = DateTime.UtcNow.AddMinutes(double.Parse(_config.GetSection("Jwt:ExpirationInMinutes").Value)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

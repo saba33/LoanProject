@@ -5,15 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoanProject.Data.Models
+namespace LoanProject.Services.Models.Loan.LoanServiceResponses
 {
-    public class Loan
+    public class TakeLoanRequestDto
     {
-        public int LoanId { get; set; }
         public LoanType loanType { get; set; }
         public decimal Amount { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
         public DateTime DateIssued { get; set; }
         public int TermInMonths { get; set; }
         public decimal InterestRate { get; set; }

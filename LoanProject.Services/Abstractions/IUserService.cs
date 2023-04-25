@@ -1,5 +1,7 @@
 ﻿using LoanProject.Services.Models;
-using LoanProject.Services.Models.Responses;
+using LoanProject.Services.Models.Loan.LoanServiceResponses;
+using LoanProject.Services.Models.User;
+using LoanProject.Services.Models.User.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;

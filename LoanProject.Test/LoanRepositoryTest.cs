@@ -3,12 +3,6 @@ using LoanProject.Data.Models;
 using LoanProject.Data.Models.Enums;
 using LoanProject.Repository.Implementations;
 using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace LoanProject.Repository.Tests
 {

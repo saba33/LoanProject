@@ -1,6 +1,4 @@
 ﻿using LoanProject.Web.Infrastructure.Helper;
-using Microsoft.AspNetCore.Http.Features;
-using Serilog;
 using System.Diagnostics;
 
 public class LoggingMiddleware

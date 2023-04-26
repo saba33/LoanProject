@@ -1,21 +1,16 @@
-using Serilog.Events;
-using Serilog.Sinks.MSSqlServer;
-using Serilog;
-using Microsoft.Extensions.Options;
 using LoanProject.Data.DbContect;
-using Microsoft.EntityFrameworkCore;
-using LoanProject.Services.Abstractions;
-using LoanProject.Services.Implementations;
 using LoanProject.Repository.Abstractions;
 using LoanProject.Repository.Implementations;
+using LoanProject.Services.Abstractions;
+using LoanProject.Services.Implementations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Configuration;
-using AutoMapper;
-using LoanProject.Services.Infrastructure.WorkerServices;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.MSSqlServer;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,15 +53,14 @@ builder.Services.AddSwaggerGen(c =>
      });
 });
 
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
-    builder => builder.AllowAnyOrigin()
+    builder => builder.WithOrigins("http://localhost:3000", "http://localhost:5000")
    .AllowAnyMethod()
-   .AllowAnyHeader()
-   .AllowCredentials());
+   .AllowAnyHeader());
 });
+
 #pragma warning disable CS0618 
 Log.Logger = new LoggerConfiguration()
       .MinimumLevel.Verbose()
@@ -99,11 +93,12 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICRMService, CRMService>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 builder.Services.AddScoped<Random>();
-builder.Services.AddScoped<LoanStatusService>();
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
 
 
 

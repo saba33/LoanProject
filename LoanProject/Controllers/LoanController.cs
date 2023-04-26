@@ -3,10 +3,7 @@ using LoanProject.Services.Abstractions;
 using LoanProject.Services.Models.Loan.LoanServiceRequest;
 using LoanProject.Services.Models.Loan.LoanServiceResponses;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace LoanProject.Web.Controllers
@@ -26,40 +23,39 @@ namespace LoanProject.Web.Controllers
         public async Task<ActionResult<TakeLoanResponse>> TakeLoan(TakeLoanRequestDto loanRequest)
         {
             var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            TakeLoanResponse response; 
 
-
-            if (userIdClaim == null)
+            if (userIdClaim != null)
             {
-                return BadRequest(new TakeLoanResponse
-                {
-                    Message = "Invalid Token",
-                    Status = LoanStatus.Unknown,
-                    StatusCode = LoanProject.Services.Models.Enum.StatusCodes.Unauthorized
-                });
+                response = await _loanService.TakeLoan(loanRequest, int.Parse(userIdClaim.Value));
+                return Ok(response);
             }
 
-            var response = await _loanService.TakeLoan(loanRequest, int.Parse(userIdClaim.Value));
-            return Ok(response);
+            return BadRequest(new TakeLoanResponse
+            {
+                Message = "Invalid Token",
+                Status = LoanStatus.Unknown.ToString(),
+                StatusCode = StatusCodes.Status401Unauthorized
+            });
         }
 
         [Authorize]
-        [HttpGet("GetUserLoans")]
+        [HttpGet("GetUserLoans/{userId}")]
         public async Task<ActionResult<GetUserLoansResponse>> GetUserLoansByUserId(int userId)
         {
-            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-            var result = await _loanService.GetLoanByUserIdAsync(int.Parse(userIdClaim.Value));
+            var result = await _loanService.GetLoanByUserIdAsync(userId);
             var response = new GetUserLoansResponse
             {
                 Loans = result.ToList(),
                 Message = "Current Loans.",
-                StatusCode = Services.Models.Enum.StatusCodes.Success
+                StatusCode = StatusCodes.Status200OK
             };
 
             return Ok(response);
         }
 
         [Authorize]
-        [HttpPut("EditLoan")]
+        [HttpPut("EditLoan/{loanId}")]
         public async Task<ActionResult<EditLoanResponse>> EditLoanInfo(UpdateLoanRequest request, int loanId)
         {
             var result = await _loanService.EditLoanInfoAsync(request, loanId);

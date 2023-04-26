@@ -1,12 +1,6 @@
 ﻿using LoanProject.Services.Models;
-using LoanProject.Services.Models.Loan.LoanServiceResponses;
 using LoanProject.Services.Models.User;
 using LoanProject.Services.Models.User.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoanProject.Services.Abstractions
 {

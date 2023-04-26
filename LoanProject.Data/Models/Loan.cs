@@ -1,9 +1,4 @@
 ﻿using LoanProject.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoanProject.Data.Models
 {
@@ -15,6 +10,7 @@ namespace LoanProject.Data.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public int TermInMonths { get; set; }
+        public Currencies Currency  { get; set; }
         public decimal InterestRate { get; set; }
         public decimal MonthlyPayment { get; set; }
         public LoanStatus LoanStatus { get; set; }

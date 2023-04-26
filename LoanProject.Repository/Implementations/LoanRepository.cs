@@ -25,7 +25,6 @@ namespace LoanProject.Repository.Implementations
             return await base.GetAllAsync();
         }
 
-
         public async Task<IEnumerable<Loan>> GetLoansByUserIdAsync(Expression<Func<Loan, bool>> predicate)
         {
             return await base.FindAsync(predicate);

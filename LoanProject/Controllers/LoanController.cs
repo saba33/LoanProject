@@ -44,31 +44,35 @@ namespace LoanProject.Web.Controllers
 
         [Authorize]
         [HttpGet("GetUserLoans")]
-        public async Task<GetUserLoansResponse> GetUserLoansByUserId(int userId)
+        public async Task<ActionResult<GetUserLoansResponse>> GetUserLoansByUserId(int userId)
         {
             var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
             var result = await _loanService.GetLoanByUserIdAsync(int.Parse(userIdClaim.Value));
-            return new GetUserLoansResponse
+            var response = new GetUserLoansResponse
             {
                 Loans = result.ToList(),
                 Message = "Current Loans.",
                 StatusCode = Services.Models.Enum.StatusCodes.Success
             };
+
+            return Ok(response);
         }
 
         [Authorize]
         [HttpPut("EditLoan")]
-        public async Task<EditLoanResponse> EditLoanInfo(UpdateLoanRequest request, int loanId)
+        public async Task<ActionResult<EditLoanResponse>> EditLoanInfo(UpdateLoanRequest request, int loanId)
         {
-           return await _loanService.EditLoanInfoAsync(request, loanId);
+            var result = await _loanService.EditLoanInfoAsync(request, loanId);
+            return Ok(result);
         }
 
         [Authorize]
         [HttpDelete("CancelLoan")]
-        public async Task<CancelLoanResponse> CancelLoan(int loanId)
+        public async Task<ActionResult<CancelLoanResponse>> CancelLoan(int loanId)
         {
-            return await _loanService.CancelLoan(loanId);
+            var result = await _loanService.CancelLoan(loanId);
+            return Ok(result);
         }
-    
+
     }
 }

@@ -39,7 +39,6 @@ namespace LoanProject.Data.DbContect
                 Loans = new List<Loan>()
             };
 
-            // Add user to database
             Users.Add(adminUser);
             SaveChanges();
         }

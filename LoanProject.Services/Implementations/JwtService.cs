@@ -23,15 +23,15 @@ namespace LoanProject.Services.Implementations
         public string GenerateToken(string userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config.GetSection("Jwt:Secret").Value.ToCharArray());
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("JWTConfiguration:Secret").Value.ToCharArray());
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, userId),
+                    new Claim(ClaimTypes.NameIdentifier, userId)
                 }),
 
-                Expires = DateTime.UtcNow.AddMinutes(double.Parse(_config.GetSection("Jwt:ExpirationInMinutes").Value)),
+                Expires = DateTime.UtcNow.AddMinutes(double.Parse(_config.GetSection("JWTConfiguration:ExpirationInMinutes").Value)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

@@ -16,7 +16,6 @@ namespace LoanProject.Data.Models
         public User User { get; set; }
         public int TermInMonths { get; set; }
         public decimal InterestRate { get; set; }
-        public decimal DownPayment { get; set; }
         public decimal MonthlyPayment { get; set; }
         public LoanStatus LoanStatus { get; set; }
     }

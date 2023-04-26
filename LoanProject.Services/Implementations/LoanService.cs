@@ -22,11 +22,12 @@ namespace LoanProject.Services.Implementations
         private readonly IBaseRepository<Loan> _repo;
         private readonly ILoanRepository _loanRepo;
         private readonly IMapper _mapper;
-        public LoanService(IPasswordHasher hasher, IJwtService jwtService, IMapper mapper, IBaseRepository<Loan> repo)
+        public LoanService(IPasswordHasher hasher, IJwtService jwtService, IMapper mapper, IBaseRepository<Loan> repo, ILoanRepository loanRepo)
         {
             _hasher = hasher;
             _repo = repo;
             _mapper = mapper;
+            _loanRepo = loanRepo;
         }
 
         public async Task<TakeLoanResponse> TakeLoan(TakeLoanRequestDto request, int userId)

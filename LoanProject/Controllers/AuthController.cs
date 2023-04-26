@@ -22,14 +22,14 @@ namespace LoanProject.Web.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginResponse>> Register(LoginModel request)
+        public async Task<ActionResult<LoginResponse>> Login(LoginModel request)
         {
             var result = await _userService.LoginUser(request);
             return Ok(result);
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<LoginResponse>> Register(UserDto request)
+        [HttpPost("Register")]
+        public async Task<ActionResult<RegisterResponse>> Register(UserDto request)
         {
             var result = await _userService.RegisterUserAsync(request);
             return Ok(result);

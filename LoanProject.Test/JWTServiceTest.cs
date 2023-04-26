@@ -25,7 +25,7 @@ namespace LoanProject.Tests.Services
         public void GenerateToken_Should_Return_Jwt_Token()
         {
             var userId = "1";
-            var token = _jwtService.GenerateToken(userId);
+            var token = _jwtService.GenerateToken(userId,"Admin");
             Assert.IsNotNull(token);
             Assert.IsNotEmpty(token);
         }

@@ -2,11 +2,7 @@
 using LoanProject.Services.Abstractions;
 using LoanProject.Services.Models.CRM;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using System.Reflection.Metadata;
 using System.Security.Claims;
 
 namespace LoanProject.Web.Controllers
@@ -21,7 +17,7 @@ namespace LoanProject.Web.Controllers
             _service = service;
         }
         [Authorize]
-        [HttpPut("ChangeLoanStatus/{loanId}")]
+        [HttpPut("ChangeLoanStatus")]
         public async Task<ActionResult<ChangeLoanStatusResponse>> ChangeLoanStatus(ChangeStatusRequestModel request)
         {
             var role = HttpContext.User.FindFirst(ClaimTypes.Role);

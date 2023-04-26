@@ -66,7 +66,7 @@ namespace LoanProject.Services.Implementations
                 return new EditLoanResponse
                 {
                     Message = "Your loan has already been assigned a status, so it cannot be edited",
-                    StatusCode = StatusCodes.Status200OK,//.
+                    StatusCode = StatusCodes.Status200OK,
                     UserId = loan.UserId
                 };
             }

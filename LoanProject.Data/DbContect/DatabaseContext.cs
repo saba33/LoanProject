@@ -30,7 +30,7 @@ namespace LoanProject.Data.DbContect
             {
                 Name = "Saba",
                 LastName = "Gabedava",
-                Email = "admin@gmail.com",
+                Email = "gabedavasaba5@gmail.com",
                 PasswordHash = null, 
                 PasswordSalt = null,
                 IdNumber = "12398745612",

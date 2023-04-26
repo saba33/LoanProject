@@ -96,7 +96,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICRMService, CRMService>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<ILoanService, LoanService>();
-builder.Services.AddScoped<Random>();
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 

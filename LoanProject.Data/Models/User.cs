@@ -9,8 +9,8 @@
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string IdNumber { get; set; } = string.Empty;
-        public string Role { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string Role { get; set; }
         public List<Loan> Loans { get; set; }
     }
 }

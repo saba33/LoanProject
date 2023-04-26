@@ -19,5 +19,30 @@ namespace LoanProject.Data.DbContect
             base.OnModelCreating(builder);
         }
 
+        public void SeedData()
+        {
+            if (Users.Any())
+            {
+                return;
+            }
+
+            var adminUser = new User
+            {
+                Name = "Saba",
+                LastName = "Gabedava",
+                Email = "admin@gmail.com",
+                PasswordHash = null, 
+                PasswordSalt = null,
+                IdNumber = "12398745612",
+                Role = "Admin",
+                DateOfBirth = new DateTime(2000, 1, 1),
+                Loans = new List<Loan>()
+            };
+
+            // Add user to database
+            Users.Add(adminUser);
+            SaveChanges();
+        }
+
     }
 }

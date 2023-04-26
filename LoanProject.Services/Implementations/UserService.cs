@@ -45,21 +45,20 @@ namespace LoanProject.Services.Implementations
 
         public async Task<LoginResponse> LoginUser(LoginModel request)
         {
-            var users = await _repo.FindAsync(u => u.Email == request.Mail);
-            var user = users.FirstOrDefault();
-            var passInfo = GetHashandSalt(request.Mail).Result.FirstOrDefault();
+            var user =  _repo.FindAsync(u => u.Email == request.Mail).Result.FirstOrDefault();
+            
 
             if (user == null)
             {
                 return new LoginResponse { StatusCode = StatusCodes.BadRequest, Token = null, Message = "Email or password is incorrect" };
             }
 
-            if (!_hasher.VerifyPasswordHash(request.Password, passInfo.Key, passInfo.Value))
+            if (!_hasher.VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return new LoginResponse { StatusCode = StatusCodes.BadRequest, Token = null, Message = "Email or password is incorrect" };
             }
 
-            var token = _jwtService.GenerateToken(request.Mail);
+            var token = _jwtService.GenerateToken(user.Id.ToString());
 
             return new LoginResponse
             {
@@ -79,7 +78,7 @@ namespace LoanProject.Services.Implementations
                 Email = request.Email,
                 DateOfBirth = request.DateOfBirth,
                 IdNumber = request.IdNumber,
-                LastName = request.IdNumber,
+                LastName = request.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };

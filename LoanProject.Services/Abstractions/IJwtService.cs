@@ -8,6 +8,6 @@ namespace LoanProject.Services.Abstractions
 {
     public interface IJwtService
     {
-        string GenerateToken(string email);
+        string GenerateToken(string userId);
     }
 }

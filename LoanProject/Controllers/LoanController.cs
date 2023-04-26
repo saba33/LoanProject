@@ -25,7 +25,7 @@ namespace LoanProject.Web.Controllers
         [HttpPost("TakeLoan")]
         public async Task<ActionResult<TakeLoanResponse>> TakeLoan(TakeLoanRequestDto loanRequest)
         {
-            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
+            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
 
 
             if (userIdClaim == null)
@@ -46,7 +46,7 @@ namespace LoanProject.Web.Controllers
         [HttpGet("GetUserLoans")]
         public async Task<ActionResult<GetUserLoansResponse>> GetUserLoansByUserId(int userId)
         {
-            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
+            var userIdClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
             var result = await _loanService.GetLoanByUserIdAsync(int.Parse(userIdClaim.Value));
             var response = new GetUserLoansResponse
             {

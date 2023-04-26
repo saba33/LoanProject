@@ -13,9 +13,8 @@ namespace LoanProject.Data.DbContect
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-
-        public DbSet<User> Users { get; set; }
         public DbSet<Loan> Loans { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Loan>()

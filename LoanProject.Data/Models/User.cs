@@ -1,4 +1,6 @@
-﻿namespace LoanProject.Data.Models
+﻿using LoanProject.Data.Models.Enums;
+
+namespace LoanProject.Data.Models
 {
     public class User
     {
@@ -10,7 +12,7 @@
         public byte[] PasswordSalt { get; set; }
         public string IdNumber { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
-        public string Role { get; set; }
+        public string Role { get; set; } = UserRole.User.ToString();
         public List<Loan> Loans { get; set; }
     }
 }
